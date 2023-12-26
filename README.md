@@ -6,6 +6,6 @@ I plan to make this script way more usable
 Recent changes:
 ADDED A GUI VERSION - Tkinter
 
-You need to have python install (preferably > 3.9 ver)
+You need to have python installed (> 3.9)
 
-Anyone is free to contribute to my project but that most likely won't ever happen sooooo :3.
+Anyone is free to contribute but that most likely won't ever happen sooooo :3.
