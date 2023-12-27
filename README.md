@@ -3,7 +3,7 @@
 ## You need to have python and customtkinter installed.
 ### How to install customtkinter?
 Open cmd and type
-`npm install customtkinter`
+`pip install customtkinter`
 
 ## Recent changes:
 ### ADDED A GUI VERSION - Tkinter
