@@ -10,6 +10,7 @@ Open cmd and type
 
 ## Recent changes:
 Added a GUI Version
+
 Completely revamped the backup feature (Now it copies the folder and makes changes in a copied folder automatically (note: In the GUI version it is not done automatically and you have to click on the "Backup Skin" button))
 ## Things I'm working on
 Just making the code not shit
