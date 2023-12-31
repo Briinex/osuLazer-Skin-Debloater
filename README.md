@@ -10,6 +10,8 @@ Open cmd and type
 
 ## Recent changes:
 Added a GUI Version
+## Things I'm working on
+Backup Function
 
 ## Editor notes
 I don't like having stuff I don't need and I noticed that a lot of elements from old osu! skins are (for now?) unusable in the new osu!lazer client.
