@@ -1,14 +1,15 @@
 # osu!lazer SkinDebloater
 ## Deletes unnecessary files from skins that are not needed in osu!lazer.
-## You need to have python and customtkinter installed.
-### How to install customtkinter?
+## Terminal Version - Python
+## GUI Version - Python and CustomTkinter
+How to install customtkinter?
 Open cmd and type
 `pip install customtkinter`
 
 ## Recent changes:
-### ADDED A GUI VERSION - Tkinter
+Added a GUI Version
 
-
+## Editor notes
 I don't like having stuff I don't need and I noticed that a lot of elements from old osu! skins are (for now?) unusable in the new osu!lazer client.
 I plan to make this script way more usable
 
