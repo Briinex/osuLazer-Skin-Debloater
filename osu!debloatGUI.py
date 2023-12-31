@@ -51,51 +51,32 @@ def debloat2x():
                 os.remove(file_name)
                 print("File '"+file_name+"' has been successfully deleted.")
     
+ 
 def debloatAnimation():
     get_skin_directory()
     if get_skin_directory() == "":
         print("Please input the path to your skin")
-    else:
-        files_in_directory = os.listdir(skinDir)
-        count1 = 0
-        count2 = 0
-        count3 = 0
-        count4 = 0
-        count5 = 0
-        h = int(combo.get())
-        for file_name in files_in_directory:
-            if file_name.startswith("hit0-") and file_name.endswith(".png"):
-                count1 += 1
-                if count1 % h == 0:
-                    file_path = os.path.join(skinDir, file_name)
-                    os.remove(file_path)
-                    print(f"Deleted: {file_name}")
-            if file_name.startswith("hit50-") and file_name.endswith(".png"):
-                count2 += 1
-                if count2 % h == 0:
-                    file_path = os.path.join(skinDir, file_name)
-                    os.remove(file_path)
-                    print(f"Deleted: {file_name}")
-            if file_name.startswith("hit100-") and file_name.endswith(".png"):
-                count3 += 1
-                if count3 % h == 0:
-                    file_path = os.path.join(skinDir, file_name)
-                    os.remove(file_path)
-                    print(f"Deleted: {file_name}")
-            if file_name.startswith("hit100k-") and file_name.endswith(".png"):
-                count4 += 1
-                if count4 % h == 0:
-                    file_path = os.path.join(skinDir, file_name)
-                    os.remove(file_path)
-                    print(f"Deleted: {file_name}")
-            if file_name.startswith("followpoint-") and file_name.endswith(".png"):
-                count5 += 1
-                if count5 % h == 0:
-                    file_path = os.path.join(skinDir, file_name)
-                    os.remove(file_path)
-                    print(f"Deleted: {file_name}")
-
-
+    print("DEBLOATING ANIMATIONS")
+    files_in_directory = os.listdir(skinDir)
+    count1 = 0
+    
+    h = input("How many frames apart do you want to delete? (larger number means less frames deleted) (1-4)")
+    while h not in ["1", "2", "3", "4"]:
+        h = input("Invalid input. Please enter a number between 1 and 4: ")
+    h = int(h)
+    if h > 4:
+        h = 4
+    
+    
+    
+    for file_name in files_in_directory:
+        if file_name.startswith(("hit0-","hit50-","hit100-","hit100k-")) and file_name.endswith(".png"):
+            count1 += 1
+            if count1 % h == 0:
+                file_path = os.path.join(skinDir, file_name)
+                os.remove(file_path)
+                print(f"Deleted: {file_name}")
+    
 
 def debloat():
     global status
