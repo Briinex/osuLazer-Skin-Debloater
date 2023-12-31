@@ -13,31 +13,20 @@ uselessElements = ['inputoverlay-background.png','fail-background.png','fail-bac
 
 ]
 
-def backUp():
+def copyFiles():
     get_skin_directory()
-    if get_skin_directory() == "":
-        print("Please input the path to your skin")
-    else:
-        folderDir = skinDir
-        backup_directory = 'Skin_Backup'
-        if os.path.exists(folderDir) and os.path.isdir(folderDir):
-            try:
-                os.chmod(folderDir, 0o777)
-                os.makedirs(backup_directory, exist_ok=True)
-                files_to_backup = os.listdir(folderDir)
-                for file_name in files_to_backup:
-                    source_file_path = os.path.join(folderDir, file_name)
-                    backup_file_path = os.path.join(backup_directory, file_name)
-                    shutil.copy(source_file_path, backup_file_path)
-                    print(f"File '{file_name}' backed up to '{backup_directory}'")
-
-            except OSError as e:
-                print(f"Failed to modify permissions or create backup: {e}")
-        else:
-            print("Source directory does not exist or is not a directory.")
-        
+    global skinDir
+    original_skin_dir = skinDir
+    copied_skin_dir = os.path.join(os.path.dirname(skinDir),"Debloated "+ os.path.basename(skinDir).strip())
     
-
+    try:
+        shutil.copytree(original_skin_dir, copied_skin_dir)
+        print(f"Folder '{original_skin_dir}' copied to '{copied_skin_dir}'")
+        skinDir = copied_skin_dir
+        print(f"Successfully created a debloated skin folder at '{copied_skin_dir}'")
+    except shutil.Error as e:
+        print(f"Error: {e}")
+    
 def debloat2x():
     get_skin_directory()
     if get_skin_directory() == "":
@@ -106,8 +95,8 @@ def get_skin_directory():
 customtkinter.CTkLabel(frm,text=r"Path to skin directory (C:\Users\YourName\Appdata\Roaming\osu!\Skins):").grid(row=0,column=0)
 Directory.insert(0, "")
 Directory.grid(row=1, column=0)
-customtkinter.CTkLabel(frm,text="Backs up your osu! skin").grid(row=2,column=0)
-customtkinter.CTkButton(frm, text="Backup Skin", command=backUp,width=20,).grid(row=3, column=0)
+customtkinter.CTkLabel(frm,text="Creates a copy of your osu! skin folder").grid(row=2,column=0)
+customtkinter.CTkButton(frm, text="Backup Skin", command=copyFiles,width=20,).grid(row=3, column=0)
 customtkinter.CTkLabel(frm,text="Removes unnecessary files from your skin").grid(row=4,column=0)
 customtkinter.CTkButton(frm, text="Debloat Skin",command=debloat,width=20,).grid(row=5, column=0)
 customtkinter.CTkLabel(frm,text="Removes high resolution files (If you have a high res. monitor, don't do this)").grid(row=6)

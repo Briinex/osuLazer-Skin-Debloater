@@ -56,6 +56,7 @@ def mainMenu():
                 return mainMenu()
 
         elif p == "4":
+
             if useDebloat == True:
                 debloat()
             elif useDebloat2x == True:
@@ -70,36 +71,20 @@ def mainMenu():
             print("Invalid choice\n")
             break
     return mainMenu()
-
-def backUp():
-    backup = input("Do you want to create a backup? y/n: ")
-    if backup == "y":
-        folderDir = skinDir
-        backup_directory = 'Skin_Backup'
-        if os.path.exists(folderDir) and os.path.isdir(folderDir):
-            try:
-                os.chmod(folderDir, 0o777)
-                os.makedirs(backup_directory, exist_ok=True)
-
-                files_to_backup = os.listdir(folderDir)
-
-                for file_name in files_to_backup:
-                    source_file_path = os.path.join(folderDir, file_name)
-                    backup_file_path = os.path.join(backup_directory, file_name)
-                    shutil.copy2(source_file_path, backup_file_path)
-                    print(f"File '{file_name}' backed up to '{backup_directory}'")
-                
-            except OSError as e:
-                print(f"Failed to modify permissions or create backup: {e}")
-        else:
-            print("Source directory does not exist or is not a directory.")
-    elif backup == "n":
-        return False
-    else:
-        print("Not a valid decision")
-        return mainMenu()
+def copyFiles():
+    global skinDir
+    original_skin_dir = skinDir
+    copied_skin_dir = os.path.join(os.path.dirname(skinDir),"Debloated "+ os.path.basename(skinDir).strip())
     
-
+    try:
+        shutil.copytree(original_skin_dir, copied_skin_dir)
+        print(f"Folder '{original_skin_dir}' copied to '{copied_skin_dir}'")
+        skinDir = copied_skin_dir
+        print(f"Successfully created a debloated skin folder at '{copied_skin_dir}'")
+        mainMenu()
+    except shutil.Error as e:
+        print(f"Error: {e}")
+    
 def debloat2x():
     print("REMOVING 2X")
     global skinDir
@@ -144,5 +129,5 @@ def debloat():
 
     
 skinDir = input(r"Path to skin directory (usually in C:\Users\YourName\Appdata\Roaming\osu!\Skins):  ")
-backUp()
+copyFiles()
 mainMenu()
