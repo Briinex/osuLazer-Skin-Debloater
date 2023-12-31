@@ -3,7 +3,7 @@ uselessElements = ['inputoverlay-background.png','fail-background.png','fail-bac
 
 ]
 
-a = "1.Debloat skin []\n"
+a = "\n1.Debloat skin []\n"
 b = "2.Only Delete x2 (If you use high resolutions, don't do this!) []\n"
 c = "3.Debloat animations []"
 countA = 0
@@ -56,44 +56,26 @@ def mainMenu():
                 return mainMenu()
 
         elif p == "4":
-            if useDebloat and useDebloat2x and useDebloatA == True:
-                debloat()
-                debloat2x()
-                debloatAnimation()
-                mainMenu()
-            if useDebloat and useDebloat2x == True:
-                debloat()
-                debloat2x()
-                return mainMenu()
-            if useDebloat and useDebloatA == True:
-                debloat()
-                debloatAnimation()
-                return mainMenu()
-            if useDebloatA and useDebloat2x == True:
-                debloatAnimation()
-                debloat2x()
-                return mainMenu()
             if useDebloat == True:
                 debloat()
-                return mainMenu()
-            if useDebloat2x == True:
+            elif useDebloat2x == True:
                 debloat2x()
-                return mainMenu()
-            if useDebloatA == True:
+            elif useDebloatA == True:
                 debloatAnimation()
-                return mainMenu()
-
-
+            else:
+                print("Nothing Chosen\nExiting")
+                exit() 
+            break
         else:
             print("Invalid choice\n")
             break
     return mainMenu()
+
 def backUp():
     backup = input("Do you want to create a backup? y/n: ")
     if backup == "y":
         folderDir = skinDir
         backup_directory = 'Skin_Backup'
-
         if os.path.exists(folderDir) and os.path.isdir(folderDir):
             try:
                 os.chmod(folderDir, 0o777)
@@ -104,7 +86,7 @@ def backUp():
                 for file_name in files_to_backup:
                     source_file_path = os.path.join(folderDir, file_name)
                     backup_file_path = os.path.join(backup_directory, file_name)
-                    shutil.copy(source_file_path, backup_file_path)
+                    shutil.copy2(source_file_path, backup_file_path)
                     print(f"File '{file_name}' backed up to '{backup_directory}'")
                 
             except OSError as e:
@@ -133,10 +115,7 @@ def debloatAnimation():
     print("DEBLOATING ANIMATIONS")
     files_in_directory = os.listdir(skinDir)
     count1 = 0
-    count2 = 0
-    count3 = 0
-    count4 = 0
-    count5 = 0
+    
     h = input("How many frames apart do you want to delete? (larger number means less frames deleted) (1-4)")
     while h not in ["1", "2", "3", "4"]:
         h = input("Invalid input. Please enter a number between 1 and 4: ")
@@ -147,39 +126,13 @@ def debloatAnimation():
     
     
     for file_name in files_in_directory:
-        if file_name.startswith("hit0-") and file_name.endswith(".png"):
+        if file_name.startswith(("hit0-","hit50-","hit100-","hit100k-")) and file_name.endswith(".png"):
             count1 += 1
             if count1 % h == 0:
                 file_path = os.path.join(skinDir, file_name)
                 os.remove(file_path)
                 print(f"Deleted: {file_name}")
-        if file_name.startswith("hit50-") and file_name.endswith(".png"):
-            count2 += 1
-            if count2 % h == 0:
-                file_path = os.path.join(skinDir, file_name)
-                os.remove(file_path)
-                print(f"Deleted: {file_name}")
-        if file_name.startswith("hit100-") and file_name.endswith(".png"):
-            count3 += 1
-            if count3 % h == 0:
-                file_path = os.path.join(skinDir, file_name)
-                os.remove(file_path)
-                print(f"Deleted: {file_name}")
-        if file_name.startswith("hit100k-") and file_name.endswith(".png"):
-            count4 += 1
-            if count4 % h == 0:
-                file_path = os.path.join(skinDir, file_name)
-                os.remove(file_path)
-                print(f"Deleted: {file_name}")
-        if file_name.startswith("followpoint-") and file_name.endswith(".png"):
-            count5 += 1
-            if count5 % h == 0:
-                file_path = os.path.join(skinDir, file_name)
-                os.remove(file_path)
-                print(f"Deleted: {file_name}")
-
-
-
+       
 def debloat():
     print("DEBLOATING SKIN")
     os.chdir(skinDir)
